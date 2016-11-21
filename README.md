@@ -20,7 +20,6 @@ Sample use of jsHamcrest (Note, that you need to use some of its supported test 
 <pre>
 var hamcrest = require('jsmockito/jshamcrest').JsHamcrest;
 hamcrest.Integration.QUnit({scope: QUnit});
-//the following returns "f"
 QUnit.assertThat('f', QUnit.equalTo('f'), undefined, assert);
 </pre>
 Note that th elast argument in the assertion is QUnit's assertion because the generic way to fail/pass an assertion in QUnit has been depricated without a replacement so the original seamless integration doesn't not work anymore.
