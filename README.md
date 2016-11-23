@@ -40,7 +40,7 @@ $$j.describe("Test suite ", function() {
 </pre>
 Jasmine deprecated the integration used in JsHamcrest to fail/pass an assertion without a replacement. Note that the new integration the current Jasmine spec as last argument in assertThat.
 
-To remove scoping of the test functions and provide them as global in the test scope, apply the following utility function:
+To remove scoping of the test functions and provide them as global in the test script scope, apply the following utility function:
 <pre>
 var mockito = require('jsmockito/jsmockito').JsMockito;
 (function($mockito, _global){
