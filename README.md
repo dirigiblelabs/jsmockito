@@ -2,7 +2,8 @@
 [JsMockito](http://jsmockito.org/) module for mock testing JavaScript services in Dirigible. Includes the [JsHamcrest](http://danielfm.github.com/jshamcrest/) assertions library.
 
 Sample use of jsMockito:
-<pre>var mockito = require('jsmockito/jsmockito').JsMockito;
+<pre>
+var mockito = require('jsmockito/jsmockito').JsMockito;
 
 //mock creation
 var mockedArray = mockito.mock(Array);
@@ -31,10 +32,26 @@ var env = jasmine.getEnv();
 var $$j = j.interface(jasmine, env);
 var hamcrest = require("jsmockito/jshamcrest").JsHamcrest;
 hamcrest.Integration.jasmine({scope: $$j});
-describe("Test suite ", function() {
-		var spec = it("spec", function() {
-			assertThat(1, equalTo(1), "yes", spec);
+$$j.describe("Test suite ", function() {
+		var spec = $$j.it("spec", function() {
+			$$j.assertThat(1, $$j.equalTo(1), "yes", spec);
 		});
 	});
 </pre>
 Jasmine deprecated the integration used in JsHamcrest to fail/pass an assertion without a replacement. Note that the new integration the current Jasmine spec as last argument in assertThat.
+
+To remove scoping of the test functions and provide them as global in the test scope, apply the following utility function:
+<pre>
+var mockito = require('jsmockito/jsmockito').JsMockito;
+(function($mockito, _global){
+	Object.keys($mockito).map(function(propertyName){
+		_global[propertyName] = $mockito[propertyName];
+		return propertyName;
+	});
+})(mockito, this);
+</pre>
+A reference to a library function then looks like this:
+<pre>
+var mockedArray = mock(Array);
+</pre>
+Note the direct reference to function mock without the mockito object scope in front.
