@@ -1294,20 +1294,22 @@ JsHamcrest.Integration = (function() {
       var target = params.scope || self;
 
       JsHamcrest.Integration.copyMembers(target);
-
+		//we should use Jasmine interface for adding matchers instead!
       // Assertion method exposed to Jasmine.
-      target.assertThat = function(actual, matcher, message) {
+      target.assertThat = function(actual, matcher, message, spec) {
         return JsHamcrest.Operators.assert(actual, matcher, {
           message: message,
           fail: function(message) {
-            jasmine.getEnv().currentSpec.addMatcherResult(
+          	spec.addExpectationResult(false, message, false);
+            /*jasmine.getEnv().currentSpec.addMatcherResult(
               new jasmine.ExpectationResult({passed:false, message:message})
-            );
+            );*/
           },
           pass: function(message) {
-            jasmine.getEnv().currentSpec.addMatcherResult(
+          	spec.addExpectationResult(true, message, false);
+            /*jasmine.getEnv().currentSpec.addMatcherResult(
               new jasmine.ExpectationResult({passed:true, message:message})
-            );
+            );*/
           }
         });
       };
