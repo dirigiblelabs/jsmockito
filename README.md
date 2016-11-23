@@ -24,6 +24,7 @@ hamcrest.Integration.QUnit({scope: QUnit});
 QUnit.assertThat('f', QUnit.equalTo('f'), undefined, assert);
 </pre>
 Note that the last argument in the assertion is QUnit's assertion because the generic way to fail/pass an assertion in QUnit has been depricated without a replacement so the original seamless integration doesn't not work anymore.
+
 To integrate with Jasmine:
 <pre>
 var j = require("jasmine/jasmine");
